@@ -6,8 +6,8 @@ This repository contains the coursework for WDD 131 - Dynamic Web Fundamentals.
 
 The website requires two images that need to be added to the `images` directory:
 
-1. `rubia-portrait.jpg` - A portrait image of Rubia Francesco
-2. `madagascar-flag.jpg` - An image of the Madagascar flag
+1. `erik-portrait.webp` - A portrait image of Erik German
+2. `mexico-flag.webp` - An image of the Mexico flag
 
 You can create these images yourself or download appropriate images from free stock photo websites like Unsplash, Pexels, or Pixabay. Make sure to optimize the images for web use (reduce file size while maintaining quality).
 
