@@ -1,0 +1,47 @@
+/* Larger screen styles for Temple Album */
+@media screen and (min-width: 768px) {
+    /* Header and navigation */
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    header h1 {
+        margin-bottom: 0;
+    }
+
+    .hamburger {
+        display: none; /* Hide hamburger on larger screens */
+    }
+
+    nav {
+        display: block; /* Always show nav on larger screens */
+        margin-top: 0;
+    }
+
+    nav ul {
+        flex-direction: row;
+    }
+
+    nav li {
+        margin-right: 1.5rem;
+        margin-bottom: 0;
+    }
+
+    nav li:last-child {
+        margin-right: 0;
+    }
+
+    /* Temple grid */
+    .temple-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}
+
+/* For even larger screens */
+@media screen and (min-width: 1024px) {
+    .temple-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+} 
