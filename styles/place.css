@@ -1,15 +1,21 @@
 /* CSS Variables */
 :root {
-    /* Example color scheme - adjust to match your chosen place */
-    --primary-color: #003da5;
-    --secondary-color: #d21034;
-    --accent-color: #00a650;
+    /* Blue/gray color scheme for Culiacan */
+    --primary-color: #2c5697;    /* Dark blue */
+    --secondary-color: #4a7bab;  /* Medium blue */
+    --accent-color: #2c5697;     /* Dark blue */
     --text-color: #333333;
     --background-color: #ffffff;
     --border-color: #cccccc;
+    --header-footer-bg: #2c5697; /* Dark blue for header/footer */
+    --header-footer-text: #ffffff;
+    --data-box-bg: #3b7cb9;      /* Medium blue for data box */
+    --data-box-text: #ffffff;
+    --weather-box-bg: #3b7cb9;   /* Medium blue for weather box */
+    --weather-box-text: #ffffff;
     
     /* Typography */
-    --heading-font: 'Georgia', serif;
+    --heading-font: 'Arial', sans-serif;
     --body-font: 'Arial', sans-serif;
     
     /* Spacing */
@@ -32,50 +38,74 @@ body {
     background-color: var(--background-color);
     max-width: 1200px;
     margin: 0 auto;
-    padding: var(--spacing-medium);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 header {
     text-align: center;
-    padding: var(--spacing-medium);
-    border: 1px solid var(--border-color);
-    margin-bottom: var(--spacing-medium);
+    padding: var(--spacing-large);
+    background-color: var(--header-footer-bg);
+    color: var(--header-footer-text);
+    border-bottom: 4px solid #4a7bab;
 }
 
 h1, h2 {
     font-family: var(--heading-font);
-    color: var(--primary-color);
+    color: inherit;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+main {
+    flex: 1;
 }
 
 /* Hero section */
 .hero {
     width: 100%;
-    margin-bottom: var(--spacing-large);
-    border: 1px solid var(--border-color);
+    margin-bottom: 0;
+    position: relative;
 }
 
 .hero img {
     width: 100%;
     height: auto;
     display: block;
+    max-height: 60vh;
+    object-fit: cover;
 }
 
 /* Data section */
 .data {
-    border: 1px solid var(--border-color);
+    background-color: var(--data-box-bg);
+    color: var(--data-box-text);
     padding: var(--spacing-medium);
-    margin-bottom: var(--spacing-large);
+    margin: 0;
+    position: absolute;
+    left: 2rem;
+    top: 14rem;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .data h2 {
-    text-align: center;
+    text-align: left;
     margin-bottom: var(--spacing-medium);
+    color: inherit;
+    padding-left: var(--spacing-medium);
 }
 
 .data-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--spacing-small);
+    padding: var(--spacing-medium);
 }
 
 .label {
@@ -89,30 +119,45 @@ h1, h2 {
 
 /* Weather section */
 .weather {
-    border: 1px solid var(--border-color);
+    background-color: var(--weather-box-bg);
+    color: var(--weather-box-text);
     padding: var(--spacing-medium);
-    margin-bottom: var(--spacing-large);
+    margin: 0;
+    position: absolute;
+    right: 2rem;
+    bottom: 10rem;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .weather h2 {
-    text-align: center;
+    text-align: left;
     margin-bottom: var(--spacing-medium);
+    color: inherit;
+    padding-left: var(--spacing-medium);
+}
+
+.weather h2::after {
+    content: " ☁️";
+    font-size: 1.5rem;
 }
 
 .weather-icon {
     text-align: center;
     margin-bottom: var(--spacing-medium);
+    display: none; /* Hide in desktop view */
 }
 
 .weather-data {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--spacing-small);
+    padding: var(--spacing-medium);
 }
 
 /* Mobile-specific styles */
 .mobile-icon {
-    display: block;
+    display: none;
     width: 50px;
     height: 50px;
     margin: 0 auto;
@@ -122,41 +167,57 @@ h1, h2 {
 footer {
     text-align: center;
     padding: var(--spacing-medium);
-    border-top: 1px solid var(--border-color);
-    font-size: 0.9rem;
+    background-color: var(--header-footer-bg);
+    color: var(--header-footer-text);
+    margin-top: auto;
+    border-top: 4px solid #4a7bab;
 }
 
-/* Media query for wider screens */
-@media screen and (min-width: 768px) {
-    /* Weather icon emoticon using pseudo-element */
-    .weather h2::after {
-        content: " ⛅";
-        font-size: 1.5rem;
+/* Media query for tablet screens */
+@media screen and (max-width: 900px) {
+    .data, .weather {
+        position: relative;
+        width: 90%;
+        margin: var(--spacing-medium) auto;
+        left: auto;
+        right: auto;
+        top: auto;
+        bottom: auto;
     }
     
-    /* Hide the mobile SVG icon in wider views */
+    .hero img {
+        max-height: 50vh;
+    }
+    
+    .data h2, .weather h2 {
+        text-align: center;
+    }
+}
+
+/* Media query for mobile screens */
+@media screen and (max-width: 600px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    /* Weather icon for mobile */
+    .weather-icon {
+        display: block;
+    }
+    
     .mobile-icon {
-        display: none;
+        display: block;
     }
     
-    /* Enhance layout for larger screens */
+    .weather h2::after {
+        content: "";
+    }
+    
     .data-grid, .weather-data {
         grid-template-columns: 1fr 2fr;
     }
     
     .hero img {
-        max-height: 500px;
-        object-fit: cover;
-    }
-}
-
-/* Media query for large screens */
-@media screen and (min-width: 1024px) {
-    body {
-        padding: var(--spacing-large);
-    }
-    
-    .data-grid, .weather-data {
-        grid-template-columns: 1fr 3fr;
+        max-height: 40vh;
     }
 } 
