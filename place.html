@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Details</title>
+    <link rel="stylesheet" href="styles/place.css">
+    <script src="scripts/place.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Place Title</h1>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <picture>
+                <source media="(max-width: 500px)" srcset="images/culiacan-sm.webp">
+                <source media="(max-width: 1000px)" srcset="images/culiacan-md.webp">
+                <img src="images/culiacan-lg.webp" alt="Culiacan image">
+            </picture>
+        </section>
+        
+        <section class="data">
+            <h2>Data</h2>
+            <div class="data-grid">
+                <span class="label">Label:</span>
+                <span class="value">Value</span>
+                <span class="label">Label:</span>
+                <span class="value">Value</span>
+                <span class="label">Label:</span>
+                <span class="value">Value</span>
+                <span class="label">Label:</span>
+                <span class="value">Value</span>
+                <span class="label">Label:</span>
+                <span class="value">Value</span>
+                <span class="label">Label:</span>
+                <span class="value">Value</span>
+            </div>
+        </section>
+        
+        <section class="weather">
+            <h2>Weather</h2>
+            <div class="weather-icon">
+                <img src="images/sunshine.svg" alt="Weather icon" class="mobile-icon">
+                <!-- Emoticon will be added via CSS pseudo-element in wider view -->
+            </div>
+            <div class="weather-data">
+                <span class="label">Temperature:</span>
+                <span class="value">8°C</span>
+                <span class="label">Wind Speed:</span>
+                <span class="value">10 km/h</span>
+                <span class="label">Wind Chill:</span>
+                <span class="value" id="windchill">Loading...</span>
+                <span class="label">Condition:</span>
+                <span class="value">Partly Cloudy</span>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; <span id="current-year"></span> - Your Name - Location</p>
+        <p>Last Modified: <span id="last-modified"></span></p>
+    </footer>
+</body>
+</html> 

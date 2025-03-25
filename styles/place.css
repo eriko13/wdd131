@@ -1,0 +1,162 @@
+/* CSS Variables */
+:root {
+    /* Example color scheme - adjust to match your chosen place */
+    --primary-color: #003da5;
+    --secondary-color: #d21034;
+    --accent-color: #00a650;
+    --text-color: #333333;
+    --background-color: #ffffff;
+    --border-color: #cccccc;
+    
+    /* Typography */
+    --heading-font: 'Georgia', serif;
+    --body-font: 'Arial', sans-serif;
+    
+    /* Spacing */
+    --spacing-small: 0.5rem;
+    --spacing-medium: 1rem;
+    --spacing-large: 2rem;
+}
+
+/* Base styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--body-font);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-medium);
+}
+
+header {
+    text-align: center;
+    padding: var(--spacing-medium);
+    border: 1px solid var(--border-color);
+    margin-bottom: var(--spacing-medium);
+}
+
+h1, h2 {
+    font-family: var(--heading-font);
+    color: var(--primary-color);
+}
+
+/* Hero section */
+.hero {
+    width: 100%;
+    margin-bottom: var(--spacing-large);
+    border: 1px solid var(--border-color);
+}
+
+.hero img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Data section */
+.data {
+    border: 1px solid var(--border-color);
+    padding: var(--spacing-medium);
+    margin-bottom: var(--spacing-large);
+}
+
+.data h2 {
+    text-align: center;
+    margin-bottom: var(--spacing-medium);
+}
+
+.data-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-small);
+}
+
+.label {
+    font-weight: bold;
+    text-align: right;
+}
+
+.value {
+    text-align: left;
+}
+
+/* Weather section */
+.weather {
+    border: 1px solid var(--border-color);
+    padding: var(--spacing-medium);
+    margin-bottom: var(--spacing-large);
+}
+
+.weather h2 {
+    text-align: center;
+    margin-bottom: var(--spacing-medium);
+}
+
+.weather-icon {
+    text-align: center;
+    margin-bottom: var(--spacing-medium);
+}
+
+.weather-data {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-small);
+}
+
+/* Mobile-specific styles */
+.mobile-icon {
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: var(--spacing-medium);
+    border-top: 1px solid var(--border-color);
+    font-size: 0.9rem;
+}
+
+/* Media query for wider screens */
+@media screen and (min-width: 768px) {
+    /* Weather icon emoticon using pseudo-element */
+    .weather h2::after {
+        content: " ⛅";
+        font-size: 1.5rem;
+    }
+    
+    /* Hide the mobile SVG icon in wider views */
+    .mobile-icon {
+        display: none;
+    }
+    
+    /* Enhance layout for larger screens */
+    .data-grid, .weather-data {
+        grid-template-columns: 1fr 2fr;
+    }
+    
+    .hero img {
+        max-height: 500px;
+        object-fit: cover;
+    }
+}
+
+/* Media query for large screens */
+@media screen and (min-width: 1024px) {
+    body {
+        padding: var(--spacing-large);
+    }
+    
+    .data-grid, .weather-data {
+        grid-template-columns: 1fr 3fr;
+    }
+} 
