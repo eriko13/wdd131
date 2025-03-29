@@ -1,0 +1,32 @@
+body {
+    font-family: sans-serif;
+    max-width: 960px;
+    margin: 2rem auto; /* Center the body content */
+    text-align: center; /* Center inline content like the h1 and footer text */
+}
+
+main {
+    margin: 1rem auto;
+}
+
+img {
+    display: block; /* Make images block-level elements */
+    margin: 1rem auto; /* Center images horizontally and add vertical margin */
+    opacity: 0; /* Start fully transparent */
+    animation: fadein 1s forwards; /* Apply the fadein animation */
+}
+
+/* Define the fade-in animation */
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+footer {
+    margin-top: 2rem;
+    border-top: 1px solid #ccc;
+    padding-top: 1rem;
+    text-align: center;
+    font-size: 0.9em;
+    color: #555;
+}
