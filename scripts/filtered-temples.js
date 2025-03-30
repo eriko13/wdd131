@@ -11,18 +11,18 @@ document.getElementById('lastModified').textContent = document.lastModified;
 document.addEventListener("DOMContentLoaded", () => {
     const hamburger = document.querySelector(".hamburger span:first-child");
     const closeButton = document.querySelector(".hamburger span.close");
-    const nav = document.querySelector("nav ul"); // Target the UL for toggling the class
+    const nav = document.querySelector("nav"); // Corrected: Select the nav element directly
 
     // Ensure initial state is correct
-    nav.classList.remove('show'); // Start with menu hidden
+    nav.classList.remove('open'); // Corrected: Use 'open' class
     hamburger.style.display = 'block';
     closeButton.style.display = 'none';
 
     // Function to toggle navigation
     function toggleNav() {
-        nav.classList.toggle("show");
-        hamburger.style.display = nav.classList.contains("show") ? "none" : "block";
-        closeButton.style.display = nav.classList.contains("show") ? "block" : "none";
+        nav.classList.toggle("open"); // Corrected: Use 'open' class
+        hamburger.style.display = nav.classList.contains("open") ? "none" : "block"; // Corrected: Check for 'open' class
+        closeButton.style.display = nav.classList.contains("open") ? "block" : "none"; // Corrected: Check for 'open' class
     }
 
     // Event listeners for hamburger and close button
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Add functionality to close nav when a link is clicked (optional, but good UX)
     document.querySelectorAll('nav ul li a').forEach(link => {
         link.addEventListener('click', () => {
-            if (nav.classList.contains('show')) {
+            if (nav.classList.contains('open')) { // Corrected: Check for 'open' class
                 toggleNav(); // Close the nav if it's open
             }
         });
