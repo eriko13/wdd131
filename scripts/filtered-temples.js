@@ -13,8 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeButton = document.querySelector(".hamburger span.close");
     const nav = document.querySelector("nav"); // Corrected: Select the nav element directly
 
-    // Ensure initial state is correct
-    nav.classList.remove('open'); // Corrected: Use 'open' class
+    nav.classList.remove('open');
     hamburger.style.display = 'block';
     closeButton.style.display = 'none';
 
@@ -25,15 +24,13 @@ document.addEventListener("DOMContentLoaded", () => {
         closeButton.style.display = nav.classList.contains("open") ? "block" : "none"; // Corrected: Check for 'open' class
     }
 
-    // Event listeners for hamburger and close button
     hamburger.addEventListener("click", toggleNav);
     closeButton.addEventListener("click", toggleNav);
 
-    // Add functionality to close nav when a link is clicked (optional, but good UX)
     document.querySelectorAll('nav ul li a').forEach(link => {
         link.addEventListener('click', () => {
-            if (nav.classList.contains('open')) { // Corrected: Check for 'open' class
-                toggleNav(); // Close the nav if it's open
+            if (nav.classList.contains('open')) {
+                toggleNav();
             }
         });
     });
@@ -101,24 +98,21 @@ const temples = [
     location: "San Diego, California, United States",
     dedicated: "1993, April, 25",
     area: 72000,
-    imageUrl:
-    "https://content.churchofjesuschrist.org/templesldsorg/bc/Temples/photo-galleries/san-diego-california/400x250/san-diego-temple-765109-wallpaper.jpg"
+    imageUrl: "https://churchofjesuschristtemples.org/assets/img/temples/san-diego-california-temple/san-diego-california-temple-39444.jpg"
+  },
+  { 
+    templeName: "Salt Lake City Utah",
+    location: "Salt Lake City, Utah, United States",
+    dedicated: "1983, April, 6",
+    area: 382207,
+    imageUrl: "https://churchofjesuschristtemples.org/assets/img/temples/salt-lake-temple/salt-lake-temple-37021.jpg"
   },
   {
-    templeName: "Salt Lake",
-    location: "Salt Lake City, Utah, United States",
-    dedicated: "1893, April, 6",
-    area: 253015,
-    imageUrl:
-    "https://content.churchofjesuschrist.org/templesldsorg/bc/Temples/photo-galleries/salt-lake-city-utah/400x250/salt-lake-temple-37762.jpg"
-  },
-   {
-    templeName: "Provo City Center",
+    templeName: "Provo City Center Utah",
     location: "Provo, Utah, United States",
     dedicated: "2016, March, 20",
     area: 85084,
-    imageUrl:
-    "https://content.churchofjesuschrist.org/templesldsorg/bc/Temples/photo-galleries/provo-city-center/400x250/provo-city-center-temple-1574511-wallpaper.jpg"
+    imageUrl: "https://churchofjesuschristtemples.org/assets/img/temples/provo-city-center-temple/provo-city-center-temple-3394.jpg"
   }
 ];
 
@@ -132,8 +126,8 @@ const createTempleCard = (temple) => {
     const figcaption = document.createElement('figcaption');
 
     img.src = temple.imageUrl;
-    img.alt = `${temple.templeName} Temple`; // Improved alt text
-    img.loading = 'lazy'; // Native lazy loading
+    img.alt = `${temple.templeName} Temple`;
+    img.loading = 'lazy';
     img.classList.add('temple-image');
 
     figcaption.innerHTML = `
@@ -150,7 +144,6 @@ const createTempleCard = (temple) => {
 
 // Function to display temples
 const displayTemples = (templeArray) => {
-    // Ensure templeGrid exists before trying to modify it
     if (!templeGrid) {
         console.error("Temple grid container not found!");
         return;
@@ -164,7 +157,6 @@ const displayTemples = (templeArray) => {
 
 // Function to update the page title
 const updateTitle = (title) => {
-    // Ensure pageTitle exists
     if (!pageTitle) {
         console.error("Page title element not found!");
         return;
@@ -222,15 +214,8 @@ const setupNavListeners = () => {
     });
 };
 
-// Initial setup on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Call footer updates inside DOMContentLoaded if elements might not exist yet
-    // Though typically footer elements exist on initial HTML load
-
-    // Setup navigation listeners after DOM is ready
     setupNavListeners();
 
-    // Initial display on page load
-    // Ensure this runs after the DOM is ready and templeGrid is available
     displayTemples(temples);
 }); 
