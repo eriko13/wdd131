@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Confirmation</title>
+    <meta name="description" content="Product Review Confirmation">
+    <meta name="author" content="Erik German">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/form.css">
+    <link rel="stylesheet" href="styles/review.css">
+    <script src="scripts/getdates.js" defer></script>
+    <script src="scripts/review.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Review Submitted</h1>
+    </header>
+    <main>
+        <div class="confirmation-container">
+            <h2>Thank You for Your Review!</h2>
+            <p>Your feedback is valuable to us.</p>
+            
+            <div class="review-summary">
+                <h3>Review Summary</h3>
+                <div id="review-details">
+                    <!-- Review details will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="review-counter">
+                <p>You have submitted <span id="review-count">0</span> reviews.</p>
+            </div>
+            
+            <div class="buttons">
+                <a href="form.html" class="button">Submit Another Review</a>
+                <a href="index.html" class="button secondary">Back to Home</a>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>©2025 Erik German - Mexico</p>
+        <p id="lastModified"></p>
+    </footer>
+</body>
+</html> 

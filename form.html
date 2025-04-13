@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Review Form</title>
+    <meta name="description" content="Product Review Form">
+    <meta name="author" content="Erik German">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/form.css">
+    <script src="scripts/getdates.js" defer></script>
+    <script src="scripts/form.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Product Review</h1>
+    </header>
+    <main>
+        <form method="get" action="review.html">
+            <div class="form-group">
+                <label for="product">Product Name</label>
+                <select id="product" name="product" required>
+                    <option value="" disabled selected>Choose a Product ...</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Overall Rating</label>
+                <div class="rating-container">
+                    <div class="rating-option">
+                        <label for="rating-1">☆</label>
+                        <input type="radio" id="rating-1" name="rating" value="1" required>
+                    </div>
+                    <div class="rating-option">
+                        <label for="rating-2">☆☆</label>
+                        <input type="radio" id="rating-2" name="rating" value="2">
+                    </div>
+                    <div class="rating-option">
+                        <label for="rating-3">☆☆☆</label>
+                        <input type="radio" id="rating-3" name="rating" value="3">
+                    </div>
+                    <div class="rating-option">
+                        <label for="rating-4">☆☆☆☆</label>
+                        <input type="radio" id="rating-4" name="rating" value="4">
+                    </div>
+                    <div class="rating-option">
+                        <label for="rating-5">☆☆☆☆☆</label>
+                        <input type="radio" id="rating-5" name="rating" value="5">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="installation-date">Date of Installation</label>
+                <input type="date" id="installation-date" name="installation-date" required>
+            </div>
+
+            <div class="form-group">
+                <label>Which features did you find useful in the product?</label>
+                <p class="subtext">(Check all that apply)</p>
+                <div class="checkbox-group">
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="durability" name="features" value="durability">
+                        <label for="durability">Durability</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="ease-of-use" name="features" value="ease-of-use">
+                        <label for="ease-of-use">Ease of Use</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="performance" name="features" value="performance">
+                        <label for="performance">Performance</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="design" name="features" value="design">
+                        <label for="design">Design</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="review">Written Review <span class="optional">(Optional)</span></label>
+                <textarea id="review" name="review" rows="6"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Your Name <span class="optional">(Optional)</span></label>
+                <input type="text" id="name" name="name">
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Post Review" class="submit-button">
+            </div>
+        </form>
+    </main>
+    <footer>
+        <p>©2025 Erik German - Mexico</p>
+        <p id="lastModified"></p>
+    </footer>
+</body>
+</html> 
