@@ -31,39 +31,145 @@
         <main>
             <section class="page-title">
                 <h2>Camilo's Photo Gallery</h2>
+                <p class="gallery-intro">Explore Camilo's journey through these captured moments, from his first day home to his latest adventures.</p>
+            </section>
+
+            <section class="gallery-filter">
+                <h3>Browse By Category</h3>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All Photos</button>
+                    <button class="filter-btn" data-filter="puppy">Puppy Days</button>
+                    <button class="filter-btn" data-filter="outdoor">Outdoor Fun</button>
+                    <button class="filter-btn" data-filter="daily">Daily Life</button>
+                </div>
             </section>
 
             <section class="gallery-grid">
-                <div class="gallery-item">
+                <div class="gallery-item" data-category="puppy">
                     <img src="images/camilo.webp" alt="First Day Home">
-                    <h3>First Day Home</h3>
-                    <p>Camilo exploring his new home after adoption.</p>
+                    <div class="gallery-caption">
+                        <h3>First Day Home</h3>
+                        <p>Camilo exploring his new home after adoption.</p>
+                        <span class="gallery-date">May 2020</span>
+                    </div>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item" data-category="puppy">
                     <img src="images/camilo2.webp" alt="Puppy Nap">
-                    <h3>Puppy Nap</h3>
-                    <p>Camilo taking one of his many puppy naps.</p>
+                    <div class="gallery-caption">
+                        <h3>Puppy Nap</h3>
+                        <p>Camilo taking one of his many puppy naps.</p>
+                        <span class="gallery-date">June 2020</span>
+                    </div>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item" data-category="daily">
                     <img src="images/camilo3.webp" alt="Playtime">
-                    <h3>Playtime</h3>
-                    <p>Discovering the joy of toys.</p>
+                    <div class="gallery-caption">
+                        <h3>Playtime</h3>
+                        <p>Discovering the joy of toys.</p>
+                        <span class="gallery-date">July 2020</span>
+                    </div>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item" data-category="outdoor">
                     <img src="images/camilo4.webp" alt="First Walk">
-                    <h3>First Walk</h3>
-                    <p>Camilo's first time on a leash exploring the neighborhood.</p>
+                    <div class="gallery-caption">
+                        <h3>First Walk</h3>
+                        <p>Camilo's first time on a leash exploring the neighborhood.</p>
+                        <span class="gallery-date">August 2020</span>
+                    </div>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item" data-category="daily">
                     <img src="images/camilo5.webp" alt="First Trick">
-                    <h3>First Trick</h3>
-                    <p>Learning to sit on command.</p>
+                    <div class="gallery-caption">
+                        <h3>First Trick</h3>
+                        <p>Learning to sit on command.</p>
+                        <span class="gallery-date">September 2020</span>
+                    </div>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item" data-category="daily">
                     <img src="images/camilo6.webp" alt="Window Watcher">
-                    <h3>Window Watcher</h3>
-                    <p>Camilo's favorite pastime: watching the world go by.</p>
+                    <div class="gallery-caption">
+                        <h3>Window Watcher</h3>
+                        <p>Camilo's favorite pastime: watching the world go by.</p>
+                        <span class="gallery-date">October 2020</span>
+                    </div>
                 </div>
+                <div class="gallery-item" data-category="outdoor">
+                    <img src="images/camilo7.webp" alt="Hiking Day">
+                    <div class="gallery-caption">
+                        <h3>Hiking Day</h3>
+                        <p>Camilo enjoying a mountain trail adventure.</p>
+                        <span class="gallery-date">July 2021</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="outdoor">
+                    <img src="images/camilo8.webp" alt="Beach Day">
+                    <div class="gallery-caption">
+                        <h3>Beach Day</h3>
+                        <p>First time experiencing sand and waves.</p>
+                        <span class="gallery-date">August 2021</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="daily">
+                    <img src="images/camilo9.webp" alt="Birthday Celebration">
+                    <div class="gallery-caption">
+                        <h3>Birthday Celebration</h3>
+                        <p>Camilo's 2nd birthday with his special dog-friendly cake.</p>
+                        <span class="gallery-date">May 2022</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="outdoor">
+                    <img src="images/camilo10.webp" alt="Fall Colors">
+                    <div class="gallery-caption">
+                        <h3>Fall Colors</h3>
+                        <p>Enjoying the autumn leaves at the local park.</p>
+                        <span class="gallery-date">October 2022</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="daily">
+                    <img src="images/camilo11.webp" alt="Cozy Winter">
+                    <div class="gallery-caption">
+                        <h3>Cozy Winter</h3>
+                        <p>Camilo wrapped up in his favorite blanket during winter.</p>
+                        <span class="gallery-date">January 2023</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="outdoor">
+                    <img src="images/camilo12.webp" alt="Spring Flowers">
+                    <div class="gallery-caption">
+                        <h3>Spring Flowers</h3>
+                        <p>Camilo posing among the spring blooms in the garden.</p>
+                        <span class="gallery-date">April 2023</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="daily">
+                    <img src="images/camilo13.webp" alt="New Toy Day">
+                    <div class="gallery-caption">
+                        <h3>New Toy Day</h3>
+                        <p>Camilo excited about his new squeaky toy.</p>
+                        <span class="gallery-date">June 2023</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="outdoor">
+                    <img src="images/camilo14.webp" alt="Summer Picnic">
+                    <div class="gallery-caption">
+                        <h3>Summer Picnic</h3>
+                        <p>Family picnic day with Camilo at the lake.</p>
+                        <span class="gallery-date">July 2023</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="outdoor">
+                    <img src="images/camilo15.webp" alt="Camping Trip">
+                    <div class="gallery-caption">
+                        <h3>Camping Trip</h3>
+                        <p>Camilo's first camping adventure in the mountains.</p>
+                        <span class="gallery-date">August 2023</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="gallery-note">
+                <p>Click on any image to view it in full size. New photos are added regularly as Camilo continues his adventures!</p>
+                <a href="#" class="cta-button">Submit Your Photos with Camilo</a>
             </section>
         </main>
 
@@ -85,11 +191,34 @@
                     <p>Small breeds like Camilo need specific nutrition for their high metabolism.</p>
                 </div>
             </section>
+
+            <section class="gallery-categories">
+                <h2>Photo Collections</h2>
+                <ul class="category-list">
+                    <li><a href="#">Camilo's First Year</a></li>
+                    <li><a href="#">Outdoor Adventures</a></li>
+                    <li><a href="#">Holiday Memories</a></li>
+                    <li><a href="#">With Friends & Family</a></li>
+                </ul>
+            </section>
         </aside>
     </div>
 
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <div class="lightbox-content">
+            <button id="close-lightbox" class="close-lightbox">&times;</button>
+            <img id="lightbox-image" src="" alt="">
+            <div id="lightbox-caption" class="lightbox-caption"></div>
+            <div class="lightbox-controls">
+                <button id="prev-image">&larr;</button>
+                <button id="next-image">&rarr;</button>
+            </div>
+        </div>
+    </div>
+
     <footer>
-        <p>&copy; 2023 Camilo's Corner | Erik German</p>
+        <p>&copy; <span id="year">2023</span> Camilo's Corner | Erik German</p>
     </footer>
 </body>
 </html> 

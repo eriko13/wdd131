@@ -29,60 +29,40 @@ document.addEventListener('DOMContentLoaded', () => {
 // === Filter Buttons ===
 function initFilterButtons() {
     const filterButtons = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
     
-    if (filterButtons.length > 0) {
+    if (filterButtons.length > 0 && galleryItems.length > 0) {
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
-                // Update active state
+                // Remove active class from all buttons
                 filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
                 button.classList.add('active');
                 
-                // Get filter value
-                const filter = button.getAttribute('data-filter');
+                // Get the filter value from data-filter attribute
+                const filterValue = button.getAttribute('data-filter');
                 
-                // Filter adventure posts
-                filterItems(filter);
+                // Filter gallery items
+                galleryItems.forEach(item => {
+                    // If 'all' is selected or item has the selected category, show it
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 50);
+                    } else {
+                        // Otherwise hide it with animation
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.8)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
+                    }
+                });
             });
         });
-    }
-}
-
-function filterItems(filter) {
-    // Filter adventure posts
-    const adventurePosts = document.querySelectorAll('.adventure-post');
-    if (adventurePosts.length > 0) {
-        adventurePosts.forEach(post => {
-            if (filter === 'all') {
-                post.style.display = 'block';
-            } else {
-                const categories = post.getAttribute('data-category').split(' ');
-                if (categories.includes(filter)) {
-                    post.style.display = 'block';
-                } else {
-                    post.style.display = 'none';
-                }
-            }
-        });
-    }
-
-    // Filter gallery items
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    if (galleryItems.length > 0) {
-        galleryItems.forEach(item => {
-            if (filter === 'all') {
-                item.style.display = 'block';
-            } else {
-                const category = item.getAttribute('data-category');
-                if (category === filter) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            }
-        });
-
-        // Store user's filter preference in localStorage
-        localStorage.setItem('galleryFilter', filter);
     }
 }
 
@@ -149,7 +129,7 @@ function initGalleryLightbox() {
                 lightboxImage.alt = item.alt;
                 
                 // Get caption from parent's caption div
-                const caption = item.closest('.gallery-item').querySelector('.image-caption');
+                const caption = item.closest('.gallery-item').querySelector('.gallery-caption');
                 if (caption) {
                     lightboxCaption.innerHTML = caption.innerHTML;
                 }
@@ -215,7 +195,7 @@ function updateLightboxContent(item, lightboxImage, lightboxCaption) {
     lightboxImage.alt = item.alt;
     
     // Get caption from parent's caption div
-    const caption = item.closest('.gallery-item').querySelector('.image-caption');
+    const caption = item.closest('.gallery-item').querySelector('.gallery-caption');
     if (caption) {
         lightboxCaption.innerHTML = caption.innerHTML;
     }
