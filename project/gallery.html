@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/wireframe.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="scripts/script.js" defer></script>
 </head>
 <body>
@@ -17,6 +19,9 @@
         <div class="logo">
             <h1>Camilo's Corner</h1>
         </div>
+        <button id="menu-button" class="menu-button" aria-label="Toggle menu">
+            <span class="menu-icon"></span>
+        </button>
         <nav>
             <ul id="primary-nav">
                 <li><a href="index.html">Home</a></li>
@@ -180,6 +185,7 @@
                     <img src="images/camilo4.webp" alt="Camilo at the park" class="preview-img">
                     <h3>Park Exploration</h3>
                     <p>Camilo discovers new scents and makes friends at the local dog park.</p>
+                    <a href="adventures.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
                 </div>
             </section>
 
@@ -189,6 +195,7 @@
                     <img src="images/camilo5.webp" alt="Camilo eating" class="preview-img">
                     <h3>Nutrition for Small Dogs</h3>
                     <p>Small breeds like Camilo need specific nutrition for their high metabolism.</p>
+                    <a href="pet-care.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
                 </div>
             </section>
 
@@ -218,7 +225,14 @@
     </div>
 
     <footer>
-        <p>&copy; <span id="year">2023</span> Camilo's Corner | Erik German</p>
+        <div class="footer-content">
+            <p>&copy; <span id="year">2023</span> Camilo's Corner | Erik German</p>
+            <div class="social-links">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
     </footer>
 </body>
 </html> 

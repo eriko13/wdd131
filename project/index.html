@@ -8,8 +8,10 @@
     <meta name="author" content="Erik German">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Montserrat:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/wireframe.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/fa62c117c7.js" crossorigin="anonymous"></script>
     <script src="scripts/script.js" defer></script>
 </head>
 <body>
@@ -17,6 +19,9 @@
         <div class="logo">
             <h1>Camilo's Corner</h1>
         </div>
+        <button id="menu-button" class="menu-button" aria-label="Toggle menu">
+            <span class="menu-icon"></span>
+        </button>
         <nav>
             <ul id="primary-nav">
                 <li><a href="index.html" class="active">Home</a></li>
@@ -43,6 +48,7 @@
                     <div class="welcome-text">
                         <p>Camilo is a 3-year-old Chihuahua mix who came into my life and changed it forever. With his expressive eyes and curious nature, he's more than just a pet—he's family.</p>
                         <p>Known for his playful antics and loyal companionship, Camilo enjoys long walks, playing fetch, and curling up on the couch for movie nights. His favorite activities include chasing squirrels in the park and greeting everyone who visits our home.</p>
+                        <a href="gallery.html" class="btn-primary">See More Photos <i class="fas fa-arrow-right"></i></a>
                     </div>
                     <div class="welcome-image">
                         <img src="images/camilo2.webp" alt="Camilo profile picture">
@@ -70,6 +76,14 @@
                     </div>
                 </div>
             </section>
+            
+            <section class="testimonial">
+                <div class="testimonial-content">
+                    <i class="fas fa-quote-left"></i>
+                    <p>Camilo may be small in size, but he's huge in personality and love. He reminds me daily that the best things in life often come in small packages.</p>
+                    <span class="testimonial-author">— Erik, Camilo's Human</span>
+                </div>
+            </section>
         </main>
 
         <aside>
@@ -79,6 +93,7 @@
                     <img src="images/camilo4.webp" alt="Camilo at the park" class="preview-img">
                     <h3>Park Exploration</h3>
                     <p>Camilo discovers new scents and makes friends at the local dog park.</p>
+                    <a href="adventures.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
                 </div>
             </section>
 
@@ -88,13 +103,110 @@
                     <img src="images/camilo5.webp" alt="Camilo eating" class="preview-img">
                     <h3>Nutrition for Small Dogs</h3>
                     <p>Small breeds like Camilo need specific nutrition for their high metabolism.</p>
+                    <a href="pet-care.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
                 </div>
+            </section>
+            
+            <section class="newsletter">
+                <h2>Stay Updated</h2>
+                <p>Get the latest adventures and tips from Camilo delivered straight to your inbox.</p>
+                <form id="newsletter-form" class="form-group">
+                    <div class="input-group">
+                        <input type="email" id="email" required>
+                        <label for="email">Your Email</label>
+                    </div>
+                    <button type="submit" class="btn-primary">Subscribe</button>
+                </form>
+            </section>
+            
+            <section class="quick-stats">
+                <h2>Quick Facts</h2>
+                <ul class="stats-list">
+                    <li>
+                        <i class="fas fa-birthday-cake"></i>
+                        <div class="stat-info">
+                            <span class="stat-label">Age</span>
+                            <span class="stat-value">3 years</span>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-weight"></i>
+                        <div class="stat-info">
+                            <span class="stat-label">Weight</span>
+                            <span class="stat-value">7 pounds</span>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-heart"></i>
+                        <div class="stat-info">
+                            <span class="stat-label">Favorite Toy</span>
+                            <span class="stat-value">Squeaky Duck</span>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-bone"></i>
+                        <div class="stat-info">
+                            <span class="stat-label">Favorite Treat</span>
+                            <span class="stat-value">Cheese Bits</span>
+                        </div>
+                    </li>
+                </ul>
             </section>
         </aside>
     </div>
+    
+    <section class="instagram-feed">
+        <div class="instagram-container">
+            <div class="instagram-header">
+                <i class="fab fa-instagram"></i>
+                <h2>Follow Camilo's Adventures</h2>
+                <a href="#" class="instagram-link">@camilos_adventures</a>
+            </div>
+            <div class="instagram-grid">
+                <div class="instagram-item">
+                    <img src="images/camilo3.webp" alt="Camilo on Instagram">
+                </div>
+                <div class="instagram-item">
+                    <img src="images/camilo4.webp" alt="Camilo on Instagram">
+                </div>
+                <div class="instagram-item">
+                    <img src="images/camilo5.webp" alt="Camilo on Instagram">
+                </div>
+                <div class="instagram-item">
+                    <img src="images/camilo6.webp" alt="Camilo on Instagram">
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer>
-        <p>&copy; 2023 Camilo's Corner | Erik German</p>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2>Camilo's Corner</h2>
+                <p>Adventures of a Chihuahua with a big personality</p>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="adventures.html">Blog</a></li>
+                    <li><a href="pet-care.html">Tips</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h3>Connect</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="year">2023</span> Camilo's Corner | Erik German</p>
+        </div>
     </footer>
 </body>
 </html> 

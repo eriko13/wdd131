@@ -12,7 +12,30 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (menuButton && primaryNav) {
         menuButton.addEventListener('click', () => {
+            menuButton.classList.toggle('active');
             primaryNav.classList.toggle('show');
+            document.body.classList.toggle('menu-open');
+        });
+        
+        // Close menu when a link is clicked
+        const navLinks = primaryNav.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuButton.classList.remove('active');
+                primaryNav.classList.remove('show');
+                document.body.classList.remove('menu-open');
+            });
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (primaryNav.classList.contains('show') && 
+                !primaryNav.contains(e.target) && 
+                !menuButton.contains(e.target)) {
+                menuButton.classList.remove('active');
+                primaryNav.classList.remove('show');
+                document.body.classList.remove('menu-open');
+            }
         });
     }
 
@@ -23,8 +46,34 @@ document.addEventListener('DOMContentLoaded', () => {
     initTimelineSlider();
     initMemoryWall();
     initForms();
+    initAnimations();
     loadStoredUserPreferences();
 });
+
+// === Animation on Scroll ===
+function initAnimations() {
+    // Simple animation observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    // Make gallery items visible immediately to fix filter issue
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    galleryItems.forEach(item => {
+        item.classList.add('animate');
+    });
+    
+    // Observe elements with animation classes (except gallery items)
+    const animationElements = document.querySelectorAll('.activity-card, .preview, .blog-post, .tip-category');
+    animationElements.forEach(el => {
+        observer.observe(el);
+        el.classList.add('pre-animation');
+    });
+}
 
 // === Filter Buttons ===
 function initFilterButtons() {
@@ -32,6 +81,13 @@ function initFilterButtons() {
     const galleryItems = document.querySelectorAll('.gallery-item');
     
     if (filterButtons.length > 0 && galleryItems.length > 0) {
+        // Initially show all gallery items by default
+        galleryItems.forEach(item => {
+            item.style.display = 'block';
+            item.style.opacity = '1';
+            item.style.transform = 'scale(1)';
+        });
+        
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
                 // Remove active class from all buttons
@@ -61,6 +117,9 @@ function initFilterButtons() {
                         }, 300);
                     }
                 });
+                
+                // Store user's filter preference
+                localStorage.setItem('galleryFilter', filterValue);
             });
         });
     }
@@ -94,8 +153,12 @@ function showTabContent(tab) {
         tabPanes.forEach(pane => {
             if (pane.id === tab) {
                 pane.classList.add('active');
+                setTimeout(() => {
+                    pane.classList.add('fade-in');
+                }, 50);
             } else {
                 pane.classList.remove('active');
+                pane.classList.remove('fade-in');
             }
         });
 
@@ -128,14 +191,27 @@ function initGalleryLightbox() {
                 lightboxImage.src = item.src;
                 lightboxImage.alt = item.alt;
                 
+                // Add loading animation
+                lightboxImage.classList.add('loading');
+                
+                // When image loads, remove loading class
+                lightboxImage.onload = () => {
+                    lightboxImage.classList.remove('loading');
+                };
+                
                 // Get caption from parent's caption div
                 const caption = item.closest('.gallery-item').querySelector('.gallery-caption');
                 if (caption) {
                     lightboxCaption.innerHTML = caption.innerHTML;
                 }
                 
-                // Show lightbox
+                // Show lightbox with animation
                 lightbox.classList.add('show');
+                setTimeout(() => {
+                    lightboxImage.classList.add('show');
+                    lightboxCaption.classList.add('show');
+                }, 100);
+                
                 document.body.style.overflow = 'hidden'; // Prevent scrolling
             });
         });
@@ -143,9 +219,19 @@ function initGalleryLightbox() {
         // Close lightbox
         if (closeLightbox) {
             closeLightbox.addEventListener('click', () => {
+                closeLightbox();
+            });
+        }
+        
+        // Close lightbox function
+        function closeLightbox() {
+            lightboxImage.classList.remove('show');
+            lightboxCaption.classList.remove('show');
+            
+            setTimeout(() => {
                 lightbox.classList.remove('show');
                 document.body.style.overflow = 'auto'; // Enable scrolling
-            });
+            }, 300);
         }
         
         // Navigate to previous image
@@ -167,8 +253,7 @@ function initGalleryLightbox() {
         // Close lightbox when clicking outside the content
         lightbox.addEventListener('click', (e) => {
             if (e.target === lightbox) {
-                lightbox.classList.remove('show');
-                document.body.style.overflow = 'auto'; // Enable scrolling
+                closeLightbox();
             }
         });
         
@@ -177,8 +262,7 @@ function initGalleryLightbox() {
             if (!lightbox.classList.contains('show')) return;
             
             if (e.key === 'Escape') {
-                lightbox.classList.remove('show');
-                document.body.style.overflow = 'auto'; // Enable scrolling
+                closeLightbox();
             } else if (e.key === 'ArrowLeft') {
                 currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
                 updateLightboxContent(galleryItems[currentIndex], lightboxImage, lightboxCaption);
@@ -187,12 +271,47 @@ function initGalleryLightbox() {
                 updateLightboxContent(galleryItems[currentIndex], lightboxImage, lightboxCaption);
             }
         });
+        
+        // Swipe support for touch devices
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        lightbox.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, false);
+        
+        lightbox.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, false);
+        
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                // Swipe left - next image
+                currentIndex = (currentIndex + 1) % galleryItems.length;
+                updateLightboxContent(galleryItems[currentIndex], lightboxImage, lightboxCaption);
+            }
+            if (touchEndX > touchStartX + 50) {
+                // Swipe right - previous image
+                currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+                updateLightboxContent(galleryItems[currentIndex], lightboxImage, lightboxCaption);
+            }
+        }
     }
 }
 
 function updateLightboxContent(item, lightboxImage, lightboxCaption) {
+    // Add loading animation
+    lightboxImage.classList.add('loading');
+    
+    // Set new image
     lightboxImage.src = item.src;
     lightboxImage.alt = item.alt;
+    
+    // When image loads, remove loading class
+    lightboxImage.onload = () => {
+        lightboxImage.classList.remove('loading');
+    };
     
     // Get caption from parent's caption div
     const caption = item.closest('.gallery-item').querySelector('.gallery-caption');
@@ -268,8 +387,16 @@ function setActiveYear(year) {
     galleryItems.forEach(item => {
         if (item.getAttribute('data-year') === year) {
             item.style.display = 'block';
+            setTimeout(() => {
+                item.style.opacity = '1';
+                item.style.transform = 'scale(1)';
+            }, 50);
         } else {
-            item.style.display = 'none';
+            item.style.opacity = '0';
+            item.style.transform = 'scale(0.8)';
+            setTimeout(() => {
+                item.style.display = 'none';
+            }, 300);
         }
     });
     
@@ -296,6 +423,23 @@ function initMemoryWall() {
             if (name && message) {
                 addMemory(name, message);
                 memoryForm.reset();
+                
+                // Show success message
+                const successMessage = document.createElement('div');
+                successMessage.className = 'success-message';
+                successMessage.textContent = 'Thank you for sharing your memory!';
+                memoryForm.appendChild(successMessage);
+                
+                setTimeout(() => {
+                    successMessage.classList.add('show');
+                }, 100);
+                
+                setTimeout(() => {
+                    successMessage.classList.remove('show');
+                    setTimeout(() => {
+                        memoryForm.removeChild(successMessage);
+                    }, 300);
+                }, 3000);
             }
         });
     }
@@ -334,11 +478,11 @@ function displayMemories() {
         
         // Display memories
         if (memories.length === 0) {
-            memoriesContainer.innerHTML = '<p>No memories shared yet. Be the first to share!</p>';
+            memoriesContainer.innerHTML = '<p class="no-memories">No memories shared yet. Be the first to share!</p>';
         } else {
-            memories.forEach(memory => {
+            memories.forEach((memory, index) => {
                 const memoryCard = document.createElement('div');
-                memoryCard.className = 'memory-card';
+                memoryCard.className = 'memory-card pre-animation';
                 
                 memoryCard.innerHTML = `
                     <div class="memory-author">${memory.name}</div>
@@ -347,6 +491,11 @@ function displayMemories() {
                 `;
                 
                 memoriesContainer.appendChild(memoryCard);
+                
+                // Animate cards with delay
+                setTimeout(() => {
+                    memoryCard.classList.add('animate');
+                }, index * 100);
             });
         }
     }
@@ -365,48 +514,47 @@ function initForms() {
                 // Save subscription to localStorage
                 saveSubscription(email);
                 newsletterForm.reset();
-                alert('Thank you for subscribing to Camilo\'s adventures!');
+                
+                // Show success message
+                const successMessage = document.createElement('div');
+                successMessage.className = 'success-message';
+                successMessage.textContent = 'Thank you for subscribing to Camilo\'s adventures!';
+                newsletterForm.appendChild(successMessage);
+                
+                setTimeout(() => {
+                    successMessage.classList.add('show');
+                }, 100);
+                
+                setTimeout(() => {
+                    successMessage.classList.remove('show');
+                    setTimeout(() => {
+                        newsletterForm.removeChild(successMessage);
+                    }, 300);
+                }, 3000);
             }
         });
     }
     
-    // Share adventure form
-    const shareForm = document.getElementById('share-form');
-    if (shareForm) {
-        shareForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const yourName = document.getElementById('your-name').value;
-            const dogName = document.getElementById('dog-name').value;
-            const adventureType = document.getElementById('adventure-type').value;
-            const adventureStory = document.getElementById('adventure-story').value;
-            
-            if (yourName && dogName && adventureType && adventureStory) {
-                // Save story to localStorage
-                saveSharedStory(yourName, dogName, adventureType, adventureStory);
-                shareForm.reset();
-                alert('Thank you for sharing your adventure with us!');
-            }
-        });
-    }
+    // Form validation and enhanced UI
+    const formInputs = document.querySelectorAll('input, textarea');
     
-    // Question form
-    const questionForm = document.getElementById('question-form');
-    if (questionForm) {
-        questionForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const questionName = document.getElementById('question-name').value;
-            const questionEmail = document.getElementById('question-email').value;
-            const questionCategory = document.getElementById('question-category').value;
-            const questionText = document.getElementById('question-text').value;
-            
-            if (questionName && questionEmail && questionCategory && questionText) {
-                // Save question to localStorage
-                saveQuestion(questionName, questionEmail, questionCategory, questionText);
-                questionForm.reset();
-                alert('Thank you for your question! We\'ll respond as soon as possible.');
+    formInputs.forEach(input => {
+        // Add focus and blur events for animation
+        input.addEventListener('focus', () => {
+            input.parentElement.classList.add('focused');
+        });
+        
+        input.addEventListener('blur', () => {
+            if (input.value === '') {
+                input.parentElement.classList.remove('focused');
             }
         });
-    }
+        
+        // Check if field has value on load
+        if (input.value !== '') {
+            input.parentElement.classList.add('focused');
+        }
+    });
 }
 
 function saveSubscription(email) {
@@ -470,6 +618,20 @@ function loadStoredUserPreferences() {
         if (filterButton) {
             filterButton.click();
         }
+    } else {
+        // If no stored preference, ensure that all items are visible
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        galleryItems.forEach(item => {
+            item.style.display = 'block';
+            item.style.opacity = '1';
+            item.style.transform = 'scale(1)';
+        });
+        
+        // Ensure 'All Photos' button is active
+        const allButton = document.querySelector('.filter-btn[data-filter="all"]');
+        if (allButton) {
+            allButton.classList.add('active');
+        }
     }
     
     // Load active tab preference
@@ -493,13 +655,20 @@ function loadStoredUserPreferences() {
 const loadMoreBtn = document.getElementById('load-more-btn');
 if (loadMoreBtn) {
     loadMoreBtn.addEventListener('click', () => {
-        // In a real application, this would load more adventures from a server
-        // For this demo, we'll just hide the button
-        loadMoreBtn.textContent = 'No More Adventures to Load';
-        loadMoreBtn.disabled = true;
+        // Add loading animation
+        loadMoreBtn.classList.add('loading');
+        loadMoreBtn.textContent = 'Loading...';
         
-        // Store this preference
-        localStorage.setItem('adventuresLoaded', 'all');
+        // Simulate loading delay
+        setTimeout(() => {
+            // In a real application, this would load more adventures from a server
+            loadMoreBtn.classList.remove('loading');
+            loadMoreBtn.textContent = 'No More Adventures to Load';
+            loadMoreBtn.disabled = true;
+            
+            // Store this preference
+            localStorage.setItem('adventuresLoaded', 'all');
+        }, 1500);
     });
     
     // Check if all adventures are already loaded
